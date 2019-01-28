@@ -1,5 +1,3 @@
-using System;
-
 namespace Pangul.Models
 {
     public class ErrorViewModel
