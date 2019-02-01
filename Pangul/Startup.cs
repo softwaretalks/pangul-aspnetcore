@@ -64,6 +64,7 @@ namespace Pangul
         {
             services.Configure<List<string>>(Configuration.GetSection("sites"));
             services.AddScoped<IHealthChecker, HealthChecker>();
+            services.AddScoped<IHealthJob, HealthJob>();
         }
     }
 }
