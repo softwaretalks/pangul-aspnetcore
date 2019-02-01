@@ -30,9 +30,7 @@ namespace Pangul.Services
 
         private bool IsDown(HttpResponseMessage httpResponseMessage)
         {
-            if (httpResponseMessage == null) return false;
-
-            return true;
+            return httpResponseMessage == null;
         }
     }
 }
