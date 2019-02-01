@@ -1,0 +1,5 @@
+kind: ExternalService
+name: pangul-netcore
+spec:
+  image: pangul-netcore:${IMAGE_VERSION}
+  port: 80
