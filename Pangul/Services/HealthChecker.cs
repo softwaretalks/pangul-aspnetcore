@@ -22,7 +22,7 @@ namespace Pangul.Services
                 {
                 }
 
-                result.Add(new HealthStatus(url, IsDown(httpResponseMessage)));
+                result.Add(new HealthStatus(url, IsDown(httpResponseMessage), (int?) httpResponseMessage?.StatusCode));
             }
 
             return result;
