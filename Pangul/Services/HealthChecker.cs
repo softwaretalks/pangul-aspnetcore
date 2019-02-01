@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -22,7 +23,8 @@ namespace Pangul.Services
                 {
                 }
 
-                result.Add(new HealthStatus(url, IsDown(httpResponseMessage), (int?) httpResponseMessage?.StatusCode));
+                result.Add(new HealthStatus(url, IsDown(httpResponseMessage), (int?) httpResponseMessage?.StatusCode,
+                    DateTime.Now));
             }
 
             return result;
