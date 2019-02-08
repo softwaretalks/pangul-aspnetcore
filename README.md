@@ -20,7 +20,7 @@ fandogh image publish --version ${THE_VERSION_YOU_WANT_TO_PUBLISH}
 
 * Last step is (re)deploying the service
 ```bash
-fandogh service apply -f fandogh-manifest.yml --IMAGE_VERSION=${THE_VERSION_YOU_JUST_PUBLISHED}
+fandogh service apply -f fandogh-manifest.yml -p IMAGE_VERSION=${THE_VERSION_YOU_JUST_PUBLISHED}
 ```
 
 
