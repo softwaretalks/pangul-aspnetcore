@@ -1,14 +1,14 @@
-Pangul .net core implementation
+Pangul ASP.NET Core implementation
 ===============================
 
 
-# How to deploy
+# How to deploy to Fandogh
 
 In order to deploy the Pangul on [Fandogh](https://fandogh.cloud), the docker image should first be pushed into a docker registry.
 To keep it simple for now we assume image is supposed to be published in fandogh docker registry.
 
 * First of all we need to initialize the image repository. 
-<b>This step needs to be done only once for</b>
+<b>This step needs to be done only once</b>
 ```bash
 fandogh image init --name pangul-netcore
 ```
