@@ -6,8 +6,8 @@ using Pangul.Services;
 
 namespace Pangul.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class HealthController : ControllerBase
     {
         private readonly IOptions<List<string>> _urls;

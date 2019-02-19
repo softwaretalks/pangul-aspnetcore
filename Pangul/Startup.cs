@@ -1,22 +1,30 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pangul.EntityFramework;
 using Pangul.Services;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Pangul
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly IConfiguration _configuration;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        {
+            _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
+
+            InitilizeDatabase();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -62,9 +70,34 @@ namespace Pangul
 
         private void AddCustomServices(IServiceCollection services)
         {
-            services.Configure<List<string>>(Configuration.GetSection("sites"));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlite(GetConnectionString()));
+            services.Configure<List<string>>(_configuration.GetSection("sites"));
+
             services.AddScoped<IHealthChecker, HealthChecker>();
             services.AddScoped<IHealthJob, HealthJob>();
+            services.AddScoped<IUrlService, UrlService>();
+        }
+
+        private void InitilizeDatabase()
+        {
+            var connection = new SqliteConnection(GetConnectionString());
+            connection.Open();
+
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+            using (var client = new DatabaseContext(options))
+            {
+                client.Database.EnsureCreated();
+            }
+        }
+
+        private string GetConnectionString()
+        {
+            var path = Path.Combine(_hostingEnvironment.ContentRootPath, "database.db");
+
+            return $"Data Source={path}";
         }
     }
 }
