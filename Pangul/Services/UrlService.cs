@@ -39,6 +39,11 @@ namespace Pangul.Services
         {
             var url = urlModel.Url;
 
+            if (url is null)
+            {
+                return UrlValidationResult.Malformed;
+            }
+
             var isValid = Uri.TryCreate(url, UriKind.Absolute, out var uri)
                 && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
 
