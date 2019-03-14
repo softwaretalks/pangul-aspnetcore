@@ -18,7 +18,7 @@ namespace Pangul.Services
 
         public UrlResult Create(UrlModel urlModel)
         {
-            var url = new Url
+            var url = new Entities.Url
             {
                 Value = urlModel.Url
             };
@@ -61,7 +61,7 @@ namespace Pangul.Services
             return UrlValidationResult.Ok;
         }
 
-        private UrlResult Map(Url url)
+        private UrlResult Map(Entities.Url url)
         {
             return new UrlResult(url.Id, url.Value);
         }

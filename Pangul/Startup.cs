@@ -72,7 +72,7 @@ namespace Pangul
         {
             services.AddDbContext<DatabaseContext>(options => options.UseSqlite(GetConnectionString()));
             services.Configure<List<string>>(_configuration.GetSection("sites"));
-
+            services.AddHttpClient();
             services.AddScoped<IHealthChecker, HealthChecker>();
             services.AddScoped<IHealthJob, HealthJob>();
             services.AddScoped<IUrlService, UrlService>();

@@ -1,38 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Pangul.Common;
 
 namespace Pangul.Services
 {
     public class HealthChecker : IHealthChecker
     {
-        private static readonly HttpClient HttpClient = new HttpClient();
 
-        public async Task<List<HealthStatus>> Check(IEnumerable<string> urls)
+
+        public async Task<List<HealthStatus>> Check(Urls urls)
         {
-            var result = new List<HealthStatus>();
-            foreach (var url in urls)
-            {
-                HttpResponseMessage httpResponseMessage = default;
-                try
-                {
-                    httpResponseMessage = await HttpClient.GetAsync(url);
-                }
-                catch
-                {
-                }
+            var results =await urls
+                .GetResponses()
+                ;
+            return results.ToReport();
 
-                result.Add(new HealthStatus(url, IsDown(httpResponseMessage), (int?) httpResponseMessage?.StatusCode,
-                    DateTime.Now));
-            }
-
-            return result;
         }
 
-        private bool IsDown(HttpResponseMessage httpResponseMessage)
+
+        public async Task<List<HealthStatus>> UnavailableUrls(Urls urls)
         {
-            return httpResponseMessage == null;
+            var results = await urls
+                .GetUnAvailable();
+            return results.ToReport();
         }
     }
 }
