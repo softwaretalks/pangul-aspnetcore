@@ -1,23 +1,26 @@
 ﻿using System;
 
+
 namespace Pangul.Services
 {
+
     public class HealthStatus
     {
-        public HealthStatus(string url, bool isDown, int? statusCode, DateTime requestTime)
+        public HealthStatus(string url, string urlStatus, int? statusCode, DateTime requestTime)
         {
             Url = url;
-            IsDown = isDown;
+            UrlStatus = urlStatus;
             StatusCode = statusCode;
-            RequestTime = requestTime;
+            RequestTime = requestTime.ToString();
         }
 
         public string Url { get; }
 
-        public bool IsDown { get; }
+        public string UrlStatus { get; }
 
         public int? StatusCode { get; }
 
-        public DateTime RequestTime { get; }
+        public string RequestTime { get; }
     }
+
 }

@@ -5,6 +5,7 @@ namespace Pangul.Services
 {
     public interface IHealthChecker
     {
-        Task<List<HealthStatus>> Check(IEnumerable<string> urls);
+        Task<List<HealthStatus>> Check(Urls urls);
+        Task<List<HealthStatus>> UnavailableUrls(Urls urls);
     }
 }
