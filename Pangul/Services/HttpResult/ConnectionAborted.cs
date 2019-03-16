@@ -2,12 +2,12 @@
 
 namespace Pangul.Services.HttpResult
 {
-    public class ConnectionAborted : OperationResult
+    public class ConnectionAborted : Failed
     {
-        public ConnectionAborted(string value, int? statusCode, DateTime now, bool isDown = true) : base(value, isDown, statusCode, now)
+        public ConnectionAborted(string value, int? statusCode, DateTime now, bool isDown = true) : base(value, statusCode, now, isDown)
         {
-
         }
+
         public override string ToString() =>
             nameof(ConnectionAborted);
     }
