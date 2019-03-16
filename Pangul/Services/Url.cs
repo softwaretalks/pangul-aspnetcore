@@ -36,7 +36,7 @@ namespace Pangul.Services
             HttpResponseMessage httpResponseMessage = default;
             try
             {
-                var httpClient = _clientFactory.GetOrCreate(new Uri(Uri));
+                var httpClient = _clientFactory.CreateClient(Uri);
 
                 httpResponseMessage = await httpClient.GetAsync(Value, HttpCompletionOption.ResponseHeadersRead)
                     .ConfigureAwait(false);
@@ -68,6 +68,10 @@ namespace Pangul.Services
             catch (HttpRequestException ex) when (ex.IsHostNotFound())
             {             
                 return new NotFound(Value, 404,DateTime.Now);
+            }
+            catch (InvalidOperationException)
+            {
+                return new UriNotFound(Value, 0, DateTime.Now);
             }
             
         }
