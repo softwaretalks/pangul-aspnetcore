@@ -51,7 +51,7 @@ namespace Pangul.Services
             {
                 return new UriNotFound(Value, 0, DateTime.Now);
             }
-           
+
 
             catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
             {
@@ -79,4 +79,8 @@ namespace Pangul.Services
 
         public override string ToString() => this.Value;
     }
+
 }
+
+
+

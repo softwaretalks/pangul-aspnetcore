@@ -11,4 +11,8 @@ namespace Pangul.Services.HttpResult
         public override string ToString() =>
             nameof(ConnectionAborted);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0cc8d4295b245a564bfde2daf27fd26a18a41a4c

@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
+=======
+﻿using System.Collections.Generic;
+>>>>>>> 0cc8d4295b245a564bfde2daf27fd26a18a41a4c
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +33,11 @@ namespace Pangul.Controllers
         public async Task<ActionResult<IEnumerable<HealthStatus>>> GetHealthStatus()
         {
             // just for test !!!
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 0cc8d4295b245a564bfde2daf27fd26a18a41a4c
             IUrl url = new Url("https://www.dotnettips.info/", _client);
             IUrl url2 = new Url("https://www.dotnettips.info/", _client, "post/3003/شروع-به-کار-با-dntframeworkcore-قسمت-5-مکانیزم-eventing-و-استفاده-از-سرویس‌های-موجودیت‌ها");
             IUrl url3 = new Url("http://random-domain.ir/", _client);
